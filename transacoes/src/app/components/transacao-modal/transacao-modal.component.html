@@ -1,0 +1,44 @@
+<h1 mat-dialog-title> Nova Transação </h1>
+<mat-dialog-content>
+    <mat-form-field class="form-data">
+        <mat-label>Data</mat-label>
+        <input matInput [(ngModel)]="data.data" [matDatepicker]="picker">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field class="form-valor">
+        <mat-label>Valor</mat-label>
+        <input type="number" matInput [(ngModel)]="data.valor">
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Descrição</mat-label>
+        <input matInput [(ngModel)]="data.descricao">
+    </mat-form-field>
+    <mat-select placeholder="Selecione o Responsavel" [(ngModel)]="data.responsavel" [(value)]="data.responsavel" required>
+        <mat-option *ngFor="let responsavel of responsaveis; let idx = index" [value]=responsavel>{{responsavel.nome}}</mat-option>
+    </mat-select>
+    <mat-select placeholder="Selecione a Conta" [(ngModel)]="data.conta" [(value)]="data.conta" required>
+        <mat-option *ngFor="let conta of contas; let idx = index" [value]=conta>{{conta.nome}}</mat-option>
+    </mat-select>
+    <p>
+        <label> Selecione o Tipo de Transação </label>
+    </p>
+    <mat-radio-group aria-label="Tipo de Transação" [(ngModel)]="tipoTransacao">
+        <mat-radio-button *ngFor="let transacao of keys(tipoTransacaoEnum)" [value]="transacao">{{ tipoTransacaoEnum[transacao] }}</mat-radio-button>
+    </mat-radio-group>
+    <div class="tipoTransacao">
+        <mat-select *ngIf="isDespesa" placeholder="Selecione o tipo de Despesa" [(ngModel)]="data.categoria" [(value)]="data.categoria">
+            <mat-option *ngFor="let categoria of keys(categoriaEnum)" [value]="categoria">{{categoriaEnum[categoria]}}</mat-option>
+        </mat-select>
+        <mat-select *ngIf="isReceita" placeholder="Selecione o tipo de Receita" [(ngModel)]="data.tipoRenda" [(value)]="data.tipoRenda">
+            <mat-option *ngFor="let tipoRenda of keys(tipoRendaEnum)" [value]="tipoRenda">{{tipoRendaEnum[tipoRenda]}}</mat-option>
+        </mat-select>
+        <mat-select *ngIf="isTranferencia" placeholder="Selecione a Conta de Destino" [(ngModel)]="data.contaDestino" [(value)]="data.contaDestino">
+            <mat-option *ngFor="let contaDestino of contas; let idx = index" [value]=contaDestino>{{contaDestino.nome}}</mat-option>
+        </mat-select>
+    </div>
+</mat-dialog-content>
+<div mat-dialog-actions>
+  <button mat-button (click)="onCancel()">Cancelar</button>
+  <button mat-button (click)="onSave()" cdkFocusInitial>Salvar</button>
+</div>

@@ -1,0 +1,10 @@
+{
+  "production": false,
+  "urlTransacoes": "http://localhost:4201/",
+  "imports": {
+    "transacoes": "http://localhost:4201/main.js",
+    "contas": "http://localhost:4202/main.js",
+    "responsaveis": "http://localhost:4203/main.js",
+    "single-spa": "https://unpkg.com/single-spa@5.3.1/lib/system/single-spa.min.js"
+  }
+}

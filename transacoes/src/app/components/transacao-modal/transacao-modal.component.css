@@ -1,0 +1,26 @@
+.form-valor {
+    width: 40%;
+}
+
+.form-data {
+    width: 40%;
+    margin-right: 10%;
+    margin-left: 5%;
+}
+
+mat-select {
+    padding: 2%;
+    width: 46%;
+}
+
+mat-radio-button {
+    margin: 1%;
+}
+
+mat-radio-group {
+    margin-left: 25%;
+}
+
+.tipoTransacao {
+    text-align: center;
+}

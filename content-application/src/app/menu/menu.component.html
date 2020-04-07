@@ -1,0 +1,45 @@
+<mat-sidenav-container class="container">
+    <mat-sidenav #sidenav mode='side' [opened]="true">
+      <div style="height: 100px; padding-top: 20%">
+        <img width="100" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
+      </div>
+      <mat-divider></mat-divider>
+      <mat-nav-list>
+        <mat-list-item>
+          <mat-icon mat-list-icon>date_range</mat-icon>
+          <a matLine routerLink="transacoes">Transações</a>
+        </mat-list-item>
+        <mat-list-item>
+          <mat-icon mat-list-icon>account_balance_wallet</mat-icon>
+          <a matLine routerLink="contas">Contas</a>
+        </mat-list-item>
+        <mat-list-item>
+            <mat-icon mat-list-icon>people</mat-icon>
+            <a matLine routerLink="responsaveis">Responsáveis</a>
+          </mat-list-item>
+      </mat-nav-list>
+    </mat-sidenav>
+  
+    <mat-sidenav-content>
+      <mat-toolbar color="primary">
+        <mat-toolbar-row>
+          <button mat-icon-button (click)="sidenav.toggle()">
+            <mat-icon>menu</mat-icon>
+          </button>
+          <span>BusinessControlV3</span>
+          <span class="spacer"></span>
+          <button mat-icon-button [matMenuTriggerFor]="userMenu" matTooltip={{currentUserName}}>
+            <mat-icon>person</mat-icon>
+          </button>
+        </mat-toolbar-row>
+      </mat-toolbar>
+      <!-- <router-outlet></router-outlet> -->
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+  <router-outlet></router-outlet>
+  <mat-menu #userMenu="matMenu">
+    <a mat-menu-item routerLink="profile">Perfil</a>
+    <a mat-menu-item routerLink="help">Ajuda</a>
+    <a mat-menu-item (click)="logout()">Sair</a>
+  </mat-menu>
+  

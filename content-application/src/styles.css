@@ -1,0 +1,47 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+/*!* You can add global styles to this file, and also import other style files *!*/
+/*@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';*/
+
+.table-container {
+  display: flex;
+  flex-direction: column;
+  min-width: 300px;
+  margin: 2%;
+}
+
+.page-filter-header {
+  min-height: 64px;
+  padding: 8px 24px 0;
+  margin: 2%;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+.mat-table {
+  overflow: auto;
+  max-height: 500px;
+}
+.mat-column-permissions,
+.mat-column-edit,
+.mat-column-delete{
+  max-width: 64px;
+}
+
+.mat-fab{
+  margin-left: 90%;
+}
+
+responsaveis-root,
+contas-root,
+transacoes-root {
+  margin: 69px 0px 0px 198px;
+  z-index: 2;
+  position: absolute;
+}
