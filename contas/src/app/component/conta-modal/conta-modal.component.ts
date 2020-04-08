@@ -25,7 +25,7 @@ export class ContaModalComponent implements OnInit {
   }
 
   onSave(): void {
-    this.dialogRef.close(this.data);
+    this.dialogRef.close(Conta.jsonToConta(this.data));
   }
 
   ngOnInit() {

@@ -16,4 +16,8 @@ export class Conta {
         this.responsavel = responsavel;
         this.tipoConta = tipoConta;
     }
+
+    static jsonToConta(json) {
+        return new Conta(json.id, json.nome, json.saldo, json.responsavel, json.tipoConta);
+    }
 }

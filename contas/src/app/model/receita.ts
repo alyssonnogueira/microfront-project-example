@@ -15,4 +15,8 @@ export class Receita extends Transacao {
     static jsonToDespesa(json): Receita {
         return new Receita(json.id, json.data, json.valor, json.descricao, json.responsavel, json.conta, json.tipoRenda);
     }
+
+    static isReceita(json): boolean {
+        return 'tipoRenda' in json;
+    }
 }

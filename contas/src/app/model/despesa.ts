@@ -15,4 +15,8 @@ export class Despesa extends Transacao {
     static jsonToDespesa(json): Despesa {
         return new Despesa(json.id, json.data, json.valor, json.descricao, json.responsavel, json.conta, json.categoria);
     }
-}
+
+    static isDespesa(json): boolean {
+      return 'categoria' in json;
+    }
+  }

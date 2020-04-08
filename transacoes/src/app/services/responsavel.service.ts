@@ -6,12 +6,12 @@ import { Responsavel } from '../model/responsavel';
 })
 export class ResponsavelService {
 
-  private responsaveis: Responsavel[] = [
-    new Responsavel(1, 'Alysson'),
-    new Responsavel(2, 'Giordana')
-  ];
+  private key = 'responsaveis';
+  private responsaveis: Responsavel[];
 
-  constructor() { }
+  constructor() {
+    this.responsaveis = JSON.parse(localStorage.getItem(this.key));
+  }
 
   obterResponsavelPorId(id: number): Responsavel {
     return this.responsaveis.filter(responsavel => responsavel.id === id)[0];
@@ -19,10 +19,5 @@ export class ResponsavelService {
 
   obterTodosResponsaveis(): Responsavel[] {
     return this.responsaveis;
-  }
-
-  salvarResponsavel(responsavel: Responsavel) {
-    responsavel.id = this.responsaveis.length + 1;
-    this.responsaveis.push(responsavel);
   }
 }

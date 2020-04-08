@@ -6,12 +6,12 @@ import { Responsavel } from '../model/responsavel';
 })
 export class ResponsavelService {
 
-  private responsaveis: Responsavel[] = [
-    new Responsavel(1, 'Alysson'),
-    new Responsavel(2, 'Giordana')
-  ];
+  private key = 'responsaveis';
+  private responsaveis: Responsavel[] = [];
 
-  constructor() { }
+  constructor() {
+    this.mockData();
+  }
 
   obterResponsavelPorId(id: number): Responsavel {
     return this.responsaveis.filter(responsavel => responsavel.id === id)[0];
@@ -24,5 +24,23 @@ export class ResponsavelService {
   salvarResponsavel(responsavel: Responsavel) {
     responsavel.id = this.responsaveis.length + 1;
     this.responsaveis.push(responsavel);
+    localStorage.setItem(this.key, JSON.stringify(this.responsaveis));
+  }
+
+  lerDoStorage(): Responsavel[] {
+    return JSON.parse(localStorage.getItem(this.key)) as Responsavel[];
+  }
+
+  mockData() {
+    const saveData = this.lerDoStorage();
+    if (!saveData) {
+      this.responsaveis = [
+        new Responsavel(1, 'Alysson'),
+        new Responsavel(2, 'Giordana')
+      ];
+      localStorage.setItem(this.key, JSON.stringify(this.responsaveis));
+    } else {
+      this.responsaveis = saveData;
+    }
   }
 }

@@ -8,6 +8,7 @@ import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
 import {Transacao} from '../../model/transacao';
 import { TransacaoModalComponent } from '../transacao-modal/transacao-modal.component';
 import {MatDialog } from '@angular/material/dialog';
+import { NgControlStatus } from '@angular/forms';
 
 @Component({
   selector: 'transacoes-transacao',

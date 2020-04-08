@@ -11,7 +11,11 @@ export class Transferencia extends Transacao {
         this.contaDestino = contaDestino;
     }
 
-static jsonToDespesa(json): Transferencia {
-return new Transferencia(json.id, json.data, json.valor, json.descricao, json.responsavel, json.conta, json.tipoRenda);
-}
+    static jsonToDespesa(json): Transferencia {
+        return new Transferencia(json.id, json.data, json.valor, json.descricao, json.responsavel, json.conta, json.tipoRenda);
+    }
+
+    static isTransferencia(json): boolean {
+        return 'contaDestino' in json;
+    }
 }

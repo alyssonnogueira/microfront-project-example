@@ -13,13 +13,14 @@ import { Transacao } from '../model/transacao';
 export class ContaService {
 
   private contas: Conta[];
+  private key = 'contas';
 
   constructor(private responsavelService: ResponsavelService) {
-    this.contas = [
-      new Conta(1, 'NuConta', 100, responsavelService.obterResponsavelPorId(1), TipoContaEnum.DEBITO),
-      new Conta(2, 'Bradesco', 50, responsavelService.obterResponsavelPorId(1), TipoContaEnum.DEBITO),
-      new Conta(3, 'NuConta', 200, responsavelService.obterResponsavelPorId(2), TipoContaEnum.DEBITO)
-    ];
+    this.mockData();
+    document.addEventListener(
+      'contas:alterarSaldo',
+      this.alterarSaldoEvent.bind(this)
+    );
   }
 
   obterContaPorId(id: number): Conta {
@@ -37,18 +38,45 @@ export class ContaService {
   salvarConta(conta: Conta): void {
     conta.id = this.contas.length + 1;
     this.contas.push(conta);
+    localStorage.setItem(this.key, JSON.stringify(this.contas));
+  }
+
+  alterarSaldoEvent(event?: CustomEvent) {
+    if (!!event && !!event.detail) {
+      this.alterarSaldoConta(event.detail);
+    }
   }
 
   alterarSaldoConta(transacao: Transacao) {
     const conta = this.obterContaPorId(transacao.conta.id);
-    if (transacao instanceof Despesa) {
+    if (Despesa.isDespesa(transacao)) {
       conta.saldo -= transacao.valor;
-    } else if (transacao instanceof Receita) {
+    } else if (Receita.isReceita(transacao)) {
       conta.saldo += transacao.valor;
-    } else if (transacao instanceof Transferencia) {
+    } else if (Transferencia.isTransferencia(transacao)) {
       conta.saldo -= transacao.valor;
-      const contaDestino = this.obterContaPorId(transacao.contaDestino.id);
+      const contaDestino = this.obterContaPorId((transacao as Transferencia).contaDestino.id);
       contaDestino.saldo += transacao.valor;
+    }
+    console.log(transacao);
+    localStorage.setItem(this.key, JSON.stringify(this.contas));
+  }
+
+  lerDoStorage(): Conta[] {
+    return JSON.parse(localStorage.getItem(this.key)) as Conta[];
+  }
+
+  mockData() {
+    const saveData = this.lerDoStorage();
+    if (!saveData) {
+      this.contas = [
+        new Conta(1, 'NuConta', 100, this.responsavelService.obterResponsavelPorId(1), TipoContaEnum.DEBITO),
+        new Conta(2, 'Bradesco', 50, this.responsavelService.obterResponsavelPorId(1), TipoContaEnum.DEBITO),
+        new Conta(3, 'NuConta', 200, this.responsavelService.obterResponsavelPorId(2), TipoContaEnum.DEBITO)
+      ];
+      localStorage.setItem(this.key, JSON.stringify(this.contas));
+    } else {
+      this.contas = saveData;
     }
   }
 }
