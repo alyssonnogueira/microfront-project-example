@@ -1,0 +1,21 @@
+<h1 mat-dialog-title> Nova Conta </h1>
+<mat-dialog-content>
+    <mat-form-field class="form-nome">
+        <mat-label>Nome</mat-label>
+        <input matInput [(ngModel)]="data.nome">
+    </mat-form-field>
+    <mat-form-field class="form-saldo">
+        <mat-label>Saldo</mat-label>
+        <input type="number" matInput [(ngModel)]="data.saldo">
+    </mat-form-field>
+    <mat-select placeholder="Selecione o Responsavel" [(ngModel)]="data.responsavel" [(value)]="data.responsavel" required>
+        <mat-option *ngFor="let responsavel of responsaveis; let idx = index" [value]=responsavel>{{responsavel.nome}}</mat-option>
+    </mat-select>
+    <mat-select placeholder="Selecione o Tipo de Conta" [(ngModel)]="data.tipoConta" [(value)]="data.tipoConta" required>
+        <mat-option *ngFor="let tipoConta of keys(tipoContaEnum); let idx = index" [value]=tipoContaEnum[tipoConta]>{{ tipoContaEnum[tipoConta] }}</mat-option>
+    </mat-select>
+</mat-dialog-content>
+<div mat-dialog-actions>
+  <button mat-button (click)="onCancel()">Cancelar</button>
+  <button mat-button (click)="onSave()" cdkFocusInitial>Salvar</button>
+</div>

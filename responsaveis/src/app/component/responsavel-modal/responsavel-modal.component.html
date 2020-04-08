@@ -1,0 +1,11 @@
+<h1 mat-dialog-title> Novo Responsável </h1>
+<mat-dialog-content>
+    <mat-form-field class="form-nome">
+        <mat-label>Nome</mat-label>
+        <input matInput [(ngModel)]="data.nome">
+    </mat-form-field>
+</mat-dialog-content>
+<div mat-dialog-actions>
+  <button mat-button (click)="onCancel()">Cancelar</button>
+  <button mat-button (click)="onSave()" cdkFocusInitial>Salvar</button>
+</div>

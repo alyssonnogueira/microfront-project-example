@@ -6,13 +6,13 @@ import { EmptyRouteComponent } from './components/empty-route/empty-route.compon
 
 
 const routes: Routes = [
-  { path: '**', component: EmptyRouteComponent },
+  { path: '', component: TransacaoComponent },
   { path: 'transacoes', component: TransacaoComponent }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, { useHash: true, enableTracing: false })],
   exports: [RouterModule],
-  providers: [{ provide: APP_BASE_HREF, useValue: '/' }]
+  providers: [{ provide: APP_BASE_HREF, useValue: '/transacoes' }]
 })
 export class AppRoutingModule { }

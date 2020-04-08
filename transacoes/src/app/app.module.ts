@@ -19,7 +19,8 @@ import { CdkTableModule } from '@angular/cdk/table';
   declarations: [
     AppComponent,
     EmptyRouteComponent,
-    TransacaoComponent
+    TransacaoComponent,
+    TransacaoModalComponent
   ],
   entryComponents: [
     TransacaoModalComponent

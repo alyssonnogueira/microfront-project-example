@@ -1,36 +1,32 @@
 const frontends = [
     {
-        "name": "transacoes",
-        "selector": "transacoes-root",
-        "matchRoute": "/transacoes",
-        "isDefaultApp": true
+        name: 'transacoes',
+        app: System.import('transacoes'),
+        activeWhen: ['/#/transacoes', '/transacoes', location => location.hash.endsWith('#/')],
     },
     {
-        "name": "contas",
-        "selector": "contas-root",
-        "matchRoute": "/contas",
-        "isDefaultApp": false
+        name: 'contas',
+        app: System.import('contas'),
+        activeWhen: ['/#/contas', '/contas']
     },
     {
-        "name": "responsaveis",
-        "selector": "responsaveis-root",
-        "matchRoute": "/responsaveis",
-        "isDefaultApp": false
+        name: 'responsaveis',
+        app: System.import('responsaveis'),
+        activeWhen: ['/#/responsaveis', '/responsaveis']
     }
-];
+]
 
 System.import('single-spa').then(function (singleSpa) {
     for (const frontend of frontends) {
-        singleSpa.registerApplication(
-            frontend.name,
-            () => System.import(frontend.name),
-            location => locationMatch(location, frontend.matchRoute)
-        );
+        singleSpa.registerApplication(frontend);
     }
-    singleSpa.start();
+
+    singleSpa.start({
+        urlRerouteOnly: true
+    })
 });
 
-if (window.location.pathname === "/") {
+if (window.location.pathname === "/#/") {
     for (const frontend of frontends) {
         if (frontend.isDefaultApp)
             window.location.href = frontend.matchRoute;

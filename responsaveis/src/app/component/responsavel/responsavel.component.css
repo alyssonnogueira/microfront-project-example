@@ -1,0 +1,15 @@
+table {
+    width: 100%;
+}
+
+tr:hover{
+    background-color: #a6a6a6;
+}
+
+.lado{
+    margin-left: 95%;
+}
+
+.mat-elevation-z8 {
+    margin: 20px;
+}
